@@ -27,17 +27,4 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
-
-  @Get('test/auth')
-  @UseGuards(FirebaseAuthGuard)
-  test(@Req() req) {
-    try {
-      console.log("Funciona correctamente");
-      return { message: "Funciona correctamente", user: req.user };
-      
-    } catch (error) {
-      console.log(error);
-      return { message: error };
-    }
-  }
 }

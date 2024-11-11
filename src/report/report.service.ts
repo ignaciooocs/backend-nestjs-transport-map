@@ -39,7 +39,6 @@ export class ReportService {
       const user = await this.userService.findOne(report.user.toString());
       if (!user) throw new HttpException('user not found', 404);
 
-      console.log(report, user);
       return {...report.toObject(), emailUser: user.email};
     } catch (error) {
       return { error };
