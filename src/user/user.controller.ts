@@ -13,6 +13,20 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @Get('findByEmail/:email')
+  findByEmail(@Param('email') email: string) {
+    return this.userService.findByEmail(email);
+  }
+
+  @UseGuards(FirebaseAuthGuard)
+  @Patch('distance')
+  updateDistance(
+    @Req() { user }: { user: { email: string } },
+    @Body() { distance }: { distance: number }
+  ) {
+    return this.userService.updateDistance(user.email, distance);
+  }
+
   @Get()
   findAll() {
     return this.userService.findAll();

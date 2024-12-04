@@ -9,9 +9,6 @@ export class User extends Document {
     @Prop({ required: true, unique: true })
     email: string;
 
-    @Prop({ required: true, minlength: 6 })
-    password: string;
-
     @Prop({ required: false})
     username: string;
 
@@ -20,6 +17,9 @@ export class User extends Document {
 
     @Prop({ default: Date.now })
     updatedAt: Date;
+
+    @Prop({ default: 5000 })
+    maxDistance: number
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

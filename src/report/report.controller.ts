@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, ParseIntPipe, Query } from '@nestjs/common';
 import { ReportService } from './report.service';
 import { CreateReportDto } from './dto/create-report.dto';
 import { UpdateReportDto } from './dto/update-report.dto';
@@ -20,6 +20,15 @@ export class ReportController {
   @Get()
   findAll() {
     return this.reportService.findAll();
+  }
+
+  @Get('nearby')
+  async findNearby(
+    @Query('longitude') longitude: number,
+    @Query('latitude') latitude: number,
+    @Query('maxDistance') maxDistance?: number,
+  ) {
+    return this.reportService.findNearby(Number(longitude), Number(latitude), maxDistance ? Number(maxDistance) : 5000);
   }
 
   @Get(':id')

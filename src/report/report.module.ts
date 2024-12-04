@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ReportService } from './report.service';
 import { ReportController } from './report.controller';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -14,5 +14,6 @@ import { CommentModule } from 'src/comment/comment.module';
   ],
   controllers: [ReportController],
   providers: [ReportService],
+  exports: [ReportService],
 })
 export class ReportModule {}

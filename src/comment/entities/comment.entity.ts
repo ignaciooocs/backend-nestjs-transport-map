@@ -14,6 +14,14 @@ export class Comment extends Document {
 
     @Prop({ required: true, ref: 'Report' })
     report: Types.ObjectId;
+
+    @Prop({ required: true })
+    expiresAt: Date;
 }
 
-export const CommentSchema = SchemaFactory.createForClass(Comment);
+const CommentSchema = SchemaFactory.createForClass(Comment);
+
+// Crear índice TTL en el campo expiresAt para eliminación automática
+CommentSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+
+export { CommentSchema };

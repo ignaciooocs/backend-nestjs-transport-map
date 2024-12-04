@@ -1,57 +1,76 @@
 import { Type } from "class-transformer";
-import { IsBoolean, IsEnum, IsLatitude, IsLongitude, IsNotEmpty, IsNumber, IsString, ValidateNested } from "class-validator";
+import { 
+  IsBoolean, 
+  IsDate, 
+  IsEnum, 
+  IsLatitude, 
+  IsLongitude, 
+  IsNotEmpty, 
+  IsNumber, 
+  IsOptional, 
+  IsString, 
+  ValidateNested 
+} from "class-validator";
 
 export class CreateReportDto {
-    @IsNumber()
-    @IsLatitude()
-    @IsNotEmpty()
-    latitude: number;
+  @IsNumber()
+  @IsLatitude()
+  @IsNotEmpty()
+  latitude: number;
 
-    @IsNumber()
-    @IsLongitude()
-    @IsNotEmpty()
-    longitude: number;
+  @IsNumber()
+  @IsLongitude()
+  @IsNotEmpty()
+  longitude: number;
 
-    @IsNotEmpty()
-    @IsString()
-    title: string
-    
-    @IsNotEmpty()
-    @IsString()
-    description: string;
+  @IsNotEmpty()
+  @IsString()
+  title: string;
+  
+  @IsNotEmpty()
+  @IsString()
+  description: string;
 
-    @IsNotEmpty()
-    @IsString()
-    @IsEnum(
-        ['BUS', 'MICRO', 'METRO', 'BUSMETRO', 'TAXI', 'OTRO'], 
-        { message: 'El tipo de vehiculo no es válido' }
-    )
-    type: string;
+  @IsNotEmpty()
+  @IsString()
+  @IsEnum(
+    ['BUS', 'MICRO', 'METRO', 'BUSMETRO', 'TAXI', 'OTRO'], 
+    { message: 'El tipo de vehiculo no es válido' }
+  )
+  type: string;
 
-    @IsNotEmpty()
-    @IsString()
-    from: string;
+  @IsNotEmpty()
+  @IsString()
+  from: string;
 
-    @IsNotEmpty()
-    @IsString()
-    to: string;
+  @IsNotEmpty()
+  @IsString()
+  to: string;
 
-    @IsNotEmpty()
-    @IsBoolean()
-    seats: boolean;
+  @IsNotEmpty()
+  @IsBoolean()
+  seats: boolean;
 
-    @IsNotEmpty()
-    @IsNumber()
-    quantitySeats: number;
+  @IsNotEmpty()
+  @IsNumber()
+  quantitySeats: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    numberVehicle: number;
+  @IsNotEmpty()
+  @IsNumber()
+  numberVehicle: number;
 
-    @IsNotEmpty()
-    @IsString()
-    direccion: string;
+  @IsNotEmpty()
+  @IsString()
+  direccion: string;
 
-    @IsNotEmpty()
-    date: Date
+  @IsNotEmpty()
+  date: Date;
+
+  @IsOptional()
+  @IsDate()
+  readonly expiresAt?: Date;
+
+  @IsNotEmpty()
+  @IsNumber()
+  expirationTime: number;
 }
